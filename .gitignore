@@ -1,0 +1,4 @@
+shellforge
+*.o
+*.out
+*.save
