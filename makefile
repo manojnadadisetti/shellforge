@@ -1,19 +1,12 @@
 CC = gcc
-CFLAGS = -Wall -Wextra -Iinclude
-LDLIBS = -lreadline
-
+CFLAGS = -Wall -Wextra -std=c11 -Iinclude
+SRC = $(wildcard src/*.c)
 TARGET = shellforge
 
-SRCS = src/main.c src/parser.c src/expand.c src/lexer.c src/token.c src/history.c
-OBJS = $(SRCS:.c=.o)
-
-$(TARGET): $(OBJS)
-	$(CC) $(OBJS) $(LDLIBS) -o $(TARGET)
-
-src/%.o: src/%.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(TARGET): $(SRC)
+	$(CC) $(CFLAGS) $(SRC) -lreadline -o $(TARGET)
 
 clean:
-	rm -f $(OBJS) $(TARGET)
+	rm -f $(TARGET)
 
 .PHONY: clean
